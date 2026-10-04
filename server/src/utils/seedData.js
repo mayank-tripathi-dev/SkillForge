@@ -62,7 +62,7 @@ const seedDB = async () => {
       profileImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80',
     });
 
-    console.log('Creating rich dummy course catalog...');
+    console.log('Creating 10 high-quality dummy technical courses...');
 
     const sampleVideo = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4';
 
@@ -80,7 +80,7 @@ const seedDB = async () => {
       published: true,
       sections: [
         {
-          sectionId: 'sec_1',
+          sectionId: 'sec_1_1',
           title: 'Section 1: Next.js 14 Fundamentals & App Router',
           order: 1,
           lessons: [
@@ -103,7 +103,7 @@ const seedDB = async () => {
           ],
         },
         {
-          sectionId: 'sec_2',
+          sectionId: 'sec_1_2',
           title: 'Section 2: Server Actions & Mutating Data',
           order: 2,
           lessons: [
@@ -142,7 +142,7 @@ const seedDB = async () => {
       published: true,
       sections: [
         {
-          sectionId: 'sec_21',
+          sectionId: 'sec_2_1',
           title: 'Section 1: Foundations of Design Tokens',
           order: 1,
           lessons: [
@@ -181,7 +181,7 @@ const seedDB = async () => {
       published: true,
       sections: [
         {
-          sectionId: 'sec_31',
+          sectionId: 'sec_3_1',
           title: 'Section 1: Vector Embeddings & RAG Architectures',
           order: 1,
           lessons: [
@@ -220,7 +220,7 @@ const seedDB = async () => {
       published: true,
       sections: [
         {
-          sectionId: 'sec_41',
+          sectionId: 'sec_4_1',
           title: 'Section 1: Microservices Architecture Patterns',
           order: 1,
           lessons: [
@@ -251,7 +251,7 @@ const seedDB = async () => {
       published: true,
       sections: [
         {
-          sectionId: 'sec_51',
+          sectionId: 'sec_5_1',
           title: 'Section 1: Modern CSS Layout Engines',
           order: 1,
           lessons: [
@@ -282,7 +282,7 @@ const seedDB = async () => {
       published: true,
       sections: [
         {
-          sectionId: 'sec_61',
+          sectionId: 'sec_6_1',
           title: 'Section 1: Production Kubernetes & Helm Charts',
           order: 1,
           lessons: [
@@ -291,6 +291,130 @@ const seedDB = async () => {
               title: 'Lesson 1: Deploying StatefulSets & Ingress Controllers',
               videoUrl: sampleVideo,
               duration: '21:40',
+              order: 1,
+              freePreview: true,
+            },
+          ],
+        },
+      ],
+    });
+
+    const course7 = await Course.create({
+      title: 'Python Data Structures & Algorithmic Problem Solving',
+      description: 'Ace technical coding interviews with deep dives into Trees, Graphs, Dynamic Programming, Heap/Priority Queues, and System Design.',
+      price: 49,
+      thumbnail: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format&fit=crop&q=80',
+      instructor: instructorUser1._id,
+      category: 'Development',
+      level: 'Beginner',
+      badge: 'Hot',
+      rating: 4.89,
+      ratingCount: 2150,
+      published: true,
+      sections: [
+        {
+          sectionId: 'sec_7_1',
+          title: 'Section 1: Graph Algorithms & BFS/DFS Patterns',
+          order: 1,
+          lessons: [
+            {
+              lessonId: 'les_7_1',
+              title: 'Lesson 1: Topological Sort & Cycle Detection',
+              videoUrl: sampleVideo,
+              duration: '16:45',
+              order: 1,
+              freePreview: true,
+            },
+          ],
+        },
+      ],
+    });
+
+    const course8 = await Course.create({
+      title: 'High-Performance Machine Learning Pipelines',
+      description: 'Build enterprise PyTorch models, MLops feature stores with Feast, distributed training with Ray, and Model Monitoring.',
+      price: 159,
+      thumbnail: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&auto=format&fit=crop&q=80',
+      instructor: instructorUser3._id,
+      category: 'Data Science',
+      level: 'Advanced',
+      badge: 'Bestseller',
+      rating: 4.94,
+      ratingCount: 890,
+      published: true,
+      sections: [
+        {
+          sectionId: 'sec_8_1',
+          title: 'Section 1: Distributed Model Training',
+          order: 1,
+          lessons: [
+            {
+              lessonId: 'les_8_1',
+              title: 'Lesson 1: Data Parallelism with PyTorch DDP',
+              videoUrl: sampleVideo,
+              duration: '24:10',
+              order: 1,
+              freePreview: true,
+            },
+          ],
+        },
+      ],
+    });
+
+    const course9 = await Course.create({
+      title: 'Modern Product Management for Tech Leads',
+      description: 'Bridge engineering and product design. Master user story mapping, product analytics, roadmap prioritization, and A/B testing.',
+      price: 89,
+      thumbnail: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&auto=format&fit=crop&q=80',
+      instructor: instructorUser2._id,
+      category: 'Business',
+      level: 'Intermediate',
+      badge: 'Featured',
+      rating: 4.82,
+      ratingCount: 430,
+      published: true,
+      sections: [
+        {
+          sectionId: 'sec_9_1',
+          title: 'Section 1: Product Strategy & Roadmapping',
+          order: 1,
+          lessons: [
+            {
+              lessonId: 'les_9_1',
+              title: 'Lesson 1: Defining Core Product Metrics & OKRs',
+              videoUrl: sampleVideo,
+              duration: '15:20',
+              order: 1,
+              freePreview: true,
+            },
+          ],
+        },
+      ],
+    });
+
+    const course10 = await Course.create({
+      title: 'Growth Marketing & Technical SEO for Startups',
+      description: 'Drive organic growth with technical SEO audits, schema markup, programatic content generation, and high-converting landing pages.',
+      price: 69,
+      thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80',
+      instructor: instructorUser2._id,
+      category: 'Marketing',
+      level: 'Beginner',
+      badge: 'Updated',
+      rating: 4.79,
+      ratingCount: 320,
+      published: true,
+      sections: [
+        {
+          sectionId: 'sec_10_1',
+          title: 'Section 1: Technical SEO Architecture',
+          order: 1,
+          lessons: [
+            {
+              lessonId: 'les_10_1',
+              title: 'Lesson 1: Optimizing Core Web Vitals & Server Performance',
+              videoUrl: sampleVideo,
+              duration: '13:50',
               order: 1,
               freePreview: true,
             },

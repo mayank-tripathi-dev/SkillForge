@@ -131,6 +131,7 @@ export const CourseDetailPage: React.FC = () => {
               <img
                 src={course.instructor?.profileImage || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'}
                 alt={course.instructor?.name}
+                onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'; }}
                 className="w-6 h-6 rounded-full object-cover border border-border-subtle"
               />
               <span className="text-text-primary font-medium">{course.instructor?.name || 'Marcus Vance'}</span>
@@ -184,8 +185,14 @@ export const CourseDetailPage: React.FC = () => {
         <div className="lg:col-span-4 sticky top-24">
           <div className="bg-surface-base border border-border-subtle rounded-xl overflow-hidden shadow-md p-6 space-y-6">
             <div className="aspect-video rounded-lg overflow-hidden bg-surface-muted">
-              <img src={course.thumbnail} alt={course.title} className="w-full h-full object-cover" />
+              <img
+                src={course.thumbnail}
+                alt={course.title}
+                onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800'; }}
+                className="w-full h-full object-cover"
+              />
             </div>
+
 
             <div>
               <span className="text-xs text-text-tertiary block font-code">Total Course Price</span>

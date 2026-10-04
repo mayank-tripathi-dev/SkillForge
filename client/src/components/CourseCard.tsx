@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Course } from '../types';
 import { Star, Clock, ArrowRight, Bookmark } from 'lucide-react';
+import { handleCourseImageError, handleAvatarError, FALLBACK_AVATAR } from '../utils/imageUtils';
 
 interface CourseCardProps {
   course: Course;
@@ -26,11 +27,12 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   return (
     <article className="bg-surface-base border border-border-subtle rounded-xl overflow-hidden card-glow-hover flex flex-col justify-between group">
       <div>
-        {/* Thumbnail */}
+        {/* Thumbnail with Error Fallback */}
         <div className="relative aspect-video w-full overflow-hidden bg-surface-muted">
           <img
             src={course.thumbnail}
             alt={course.title}
+            onError={handleCourseImageError}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
           {course.badge && course.badge !== 'None' && (
@@ -64,11 +66,9 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           {/* Instructor Info */}
           <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border-subtle">
             <img
-              src={
-                course.instructor?.profileImage ||
-                'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'
-              }
+              src={course.instructor?.profileImage || FALLBACK_AVATAR}
               alt={course.instructor?.name || 'Instructor'}
+              onError={handleAvatarError}
               className="w-6 h-6 rounded-full object-cover border border-border-subtle"
             />
             <span className="text-xs text-text-secondary">{course.instructor?.name || 'Senior Instructor'}</span>
@@ -83,7 +83,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             </div>
             <div className="flex items-center gap-1.5 text-text-tertiary font-code text-[11px]">
               <Clock className="w-3.5 h-3.5" />
-              <span>{course.sections?.reduce((sum, s) => sum + s.lessons.length, 0) || 12} lessons</span>
+              <span>{course.sections?.reduce((sum, s) => sum + (s.lessons?.length || 0), 0) || 12} lessons</span>
             </div>
           </div>
         </div>
