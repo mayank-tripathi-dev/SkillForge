@@ -30,7 +30,7 @@ const seedDB = async () => {
       profileImage: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
     });
 
-    const instructorUser = await User.create({
+    const instructorUser1 = await User.create({
       name: 'Marcus Vance',
       email: 'instructor@skillforge.com',
       password: hashedPassword,
@@ -46,24 +46,32 @@ const seedDB = async () => {
       profileImage: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80',
     });
 
+    const instructorUser3 = await User.create({
+      name: 'Dr. Aris Thorne',
+      email: 'aris@skillforge.com',
+      password: hashedPassword,
+      role: 'instructor',
+      profileImage: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
+    });
+
     const adminUser = await User.create({
       name: 'Admin Chief',
       email: 'admin@skillforge.com',
       password: hashedPassword,
       role: 'admin',
-      profileImage: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
+      profileImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80',
     });
 
-    console.log('Creating demo courses...');
+    console.log('Creating rich dummy course catalog...');
 
     const sampleVideo = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4';
 
     const course1 = await Course.create({
       title: 'Advanced React & Next.js Architecture',
-      description: 'Master enterprise-level Next.js 14 App Router, Server Components, Server Actions, state management with Zustand, and performant server rendering patterns.',
+      description: 'Master enterprise Next.js 14 App Router, Server Components, Server Actions, Zustand state management, and edge rendering patterns.',
       price: 129,
       thumbnail: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&auto=format&fit=crop&q=80',
-      instructor: instructorUser._id,
+      instructor: instructorUser1._id,
       category: 'Development',
       level: 'Advanced',
       badge: 'Bestseller',
@@ -77,16 +85,16 @@ const seedDB = async () => {
           order: 1,
           lessons: [
             {
-              lessonId: 'les_1',
-              title: 'Lesson 1: React 18 Server Components Explained',
+              lessonId: 'les_1_1',
+              title: 'Lesson 1: React 18 Server Components Deep Dive',
               videoUrl: sampleVideo,
               duration: '14:20',
               order: 1,
               freePreview: true,
             },
             {
-              lessonId: 'les_2',
-              title: 'Lesson 2: App Router Layouts, Pages, and Slots',
+              lessonId: 'les_1_2',
+              title: 'Lesson 2: Nested Layouts, Templates, & Parallel Routes',
               videoUrl: sampleVideo,
               duration: '18:45',
               order: 2,
@@ -100,15 +108,15 @@ const seedDB = async () => {
           order: 2,
           lessons: [
             {
-              lessonId: 'les_3',
-              title: 'Lesson 3: Building Type-Safe Server Actions',
+              lessonId: 'les_1_3',
+              title: 'Lesson 3: Building Type-Safe Server Actions with Zod',
               videoUrl: sampleVideo,
               duration: '22:10',
               order: 1,
               freePreview: false,
             },
             {
-              lessonId: 'les_4',
+              lessonId: 'les_1_4',
               title: 'Lesson 4: Optimistic UI Updates & Error Boundaries',
               videoUrl: sampleVideo,
               duration: '16:30',
@@ -122,7 +130,7 @@ const seedDB = async () => {
 
     const course2 = await Course.create({
       title: 'Design Systems & Micro-Interactions',
-      description: 'Architect scalable UI component libraries with Tailwind CSS, Radix Primitives, motion design, and accessible tokens.',
+      description: 'Architect scalable UI component libraries with Tailwind CSS, Radix Primitives, motion design, glassmorphism, and accessible tokens.',
       price: 99,
       thumbnail: 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&auto=format&fit=crop&q=80',
       instructor: instructorUser2._id,
@@ -139,16 +147,16 @@ const seedDB = async () => {
           order: 1,
           lessons: [
             {
-              lessonId: 'les_21',
-              title: 'Lesson 1: Crafting Color & Typography Systems',
+              lessonId: 'les_2_1',
+              title: 'Lesson 1: Crafting Color & Typography Token Systems',
               videoUrl: sampleVideo,
               duration: '12:00',
               order: 1,
               freePreview: true,
             },
             {
-              lessonId: 'les_22',
-              title: 'Lesson 2: Accessible Focus States & Contrast',
+              lessonId: 'les_2_2',
+              title: 'Lesson 2: Accessible Focus Rings & Dynamic Contrast',
               videoUrl: sampleVideo,
               duration: '15:40',
               order: 2,
@@ -161,10 +169,10 @@ const seedDB = async () => {
 
     const course3 = await Course.create({
       title: 'AI & LLM Systems Engineering with Node.js',
-      description: 'Build production RAG pipelines, custom AI agents, vector database search with Pinecone, and OpenAI API integrations.',
+      description: 'Build production RAG pipelines, custom AI agents, vector database search with Pinecone, and LangChain Node integrations.',
       price: 149,
       thumbnail: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?w=800&auto=format&fit=crop&q=80',
-      instructor: instructorUser._id,
+      instructor: instructorUser3._id,
       category: 'Development',
       level: 'Advanced',
       badge: 'Hot',
@@ -178,12 +186,20 @@ const seedDB = async () => {
           order: 1,
           lessons: [
             {
-              lessonId: 'les_31',
+              lessonId: 'les_3_1',
               title: 'Lesson 1: Introduction to Vector Similarity Search',
               videoUrl: sampleVideo,
               duration: '20:15',
               order: 1,
               freePreview: true,
+            },
+            {
+              lessonId: 'les_3_2',
+              title: 'Lesson 2: Building Autonomous Multi-Step Tool Agents',
+              videoUrl: sampleVideo,
+              duration: '25:30',
+              order: 2,
+              freePreview: false,
             },
           ],
         },
@@ -192,10 +208,10 @@ const seedDB = async () => {
 
     const course4 = await Course.create({
       title: 'Full-Stack Node.js Microservices Masterclass',
-      description: 'Learn event-driven microservices using Docker, RabbitMQ, Redis, gRPC, and Express API Gateways.',
+      description: 'Learn event-driven microservices using Docker, RabbitMQ, Redis caching, gRPC, and Express API Gateways.',
       price: 119,
       thumbnail: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop&q=80',
-      instructor: instructorUser._id,
+      instructor: instructorUser1._id,
       category: 'IT & Software',
       level: 'Intermediate',
       badge: 'Featured',
@@ -205,12 +221,12 @@ const seedDB = async () => {
       sections: [
         {
           sectionId: 'sec_41',
-          title: 'Section 1: Microservices vs Monoliths',
+          title: 'Section 1: Microservices Architecture Patterns',
           order: 1,
           lessons: [
             {
-              lessonId: 'les_41',
-              title: 'Lesson 1: Decomposing a Monolith into Services',
+              lessonId: 'les_4_1',
+              title: 'Lesson 1: Decomposing Monoliths into Decoupled Services',
               videoUrl: sampleVideo,
               duration: '19:00',
               order: 1,
@@ -223,7 +239,7 @@ const seedDB = async () => {
 
     const course5 = await Course.create({
       title: 'Modern CSS, Glassmorphic UI & Animation',
-      description: 'Master modern CSS features including subgrid, CSS container queries, view transitions, and custom canvas micro-interactions.',
+      description: 'Master modern CSS layout features including container queries, subgrid, view transitions, and custom canvas micro-pixel effects.',
       price: 0,
       thumbnail: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&auto=format&fit=crop&q=80',
       instructor: instructorUser2._id,
@@ -240,10 +256,41 @@ const seedDB = async () => {
           order: 1,
           lessons: [
             {
-              lessonId: 'les_51',
+              lessonId: 'les_5_1',
               title: 'Lesson 1: Container Queries & Flexbox Grid Secrets',
               videoUrl: sampleVideo,
               duration: '11:20',
+              order: 1,
+              freePreview: true,
+            },
+          ],
+        },
+      ],
+    });
+
+    const course6 = await Course.create({
+      title: 'Cloud Native Kubernetes & DevOps Pipeline',
+      description: 'Deploy production Kubernetes clusters, GitOps pipelines with ArgoCD, Terraform infrastructure as code, and Prometheus monitoring.',
+      price: 139,
+      thumbnail: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800&auto=format&fit=crop&q=80',
+      instructor: instructorUser3._id,
+      category: 'IT & Software',
+      level: 'Advanced',
+      badge: 'Bestseller',
+      rating: 4.96,
+      ratingCount: 1120,
+      published: true,
+      sections: [
+        {
+          sectionId: 'sec_61',
+          title: 'Section 1: Production Kubernetes & Helm Charts',
+          order: 1,
+          lessons: [
+            {
+              lessonId: 'les_6_1',
+              title: 'Lesson 1: Deploying StatefulSets & Ingress Controllers',
+              videoUrl: sampleVideo,
+              duration: '21:40',
               order: 1,
               freePreview: true,
             },
@@ -259,24 +306,18 @@ const seedDB = async () => {
       course: course1._id,
       amount: course1.price,
       paymentStatus: 'completed',
-      paymentMethod: 'demo_card',
+      paymentMethod: 'demo_checkout',
     });
 
     await Progress.create({
       student: studentUser._id,
       course: course1._id,
-      completedLessons: ['les_1'],
+      completedLessons: ['les_1_1'],
       completionPercentage: 25,
-      lastAccessedLesson: 'les_1',
+      lastAccessedLesson: 'les_1_1',
     });
 
-    console.log('Seed process finished successfully!');
-    console.log('\n--- DEMO CREDENTIALS ---');
-    console.log('Student:    student@skillforge.com   / password123');
-    console.log('Instructor: instructor@skillforge.com / password123');
-    console.log('Admin:      admin@skillforge.com      / password123');
-    console.log('------------------------\n');
-
+    console.log('Database seeding finished successfully!');
     process.exit(0);
   } catch (error) {
     console.error('Database seeding failed:', error);

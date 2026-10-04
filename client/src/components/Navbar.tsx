@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Layers, Search, Grid, LogOut, User as UserIcon, BookOpen, LayoutDashboard, Shield, PlusCircle } from 'lucide-react';
+import { Layers, Search, LogOut, User as UserIcon, BookOpen, LayoutDashboard, Shield, PlusCircle, Sparkles } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const { user, logout } = useAuth();
@@ -25,21 +25,21 @@ export const Navbar: React.FC = () => {
   return (
     <header className="w-full sticky top-0 z-50 bg-surface-base border-b border-border-subtle transition-colors duration-150 shadow-xs">
       <div className="w-full px-margin-mobile md:px-margin flex items-center justify-between h-16 max-w-7xl mx-auto gap-4">
-        {/* Brand Logo */}
+        {/* Brand Logo Anchor */}
         <Link to="/courses" className="flex items-center gap-2.5 group">
           <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white shadow-sm transition-transform duration-150 group-hover:scale-95">
-            <Layers className="w-4 h-4 text-white" />
+            <Layers className="w-4.5 h-4.5 text-white" />
           </div>
           <span className="text-headline-sm font-semibold tracking-tight text-primary font-body">SkillForge</span>
         </Link>
 
-        {/* Navigation Links */}
+        {/* Desktop Navigation Links matching Stitch prototype */}
         <nav className="hidden md:flex items-center gap-8 h-full">
           <Link
             to="/courses"
-            className={`font-medium pb-1 h-full flex items-center text-sm transition-colors ${
+            className={`font-medium pb-1 h-full flex items-center text-xs transition-colors ${
               location.pathname === '/courses'
-                ? 'text-primary border-b-2 border-primary'
+                ? 'text-primary border-b-2 border-primary font-semibold'
                 : 'text-text-secondary hover:text-primary'
             }`}
           >
@@ -47,17 +47,27 @@ export const Navbar: React.FC = () => {
           </Link>
           <Link
             to="/courses?sort=newest"
-            className="text-text-secondary hover:text-primary transition-colors pb-1 h-full flex items-center text-sm"
+            className="text-text-secondary hover:text-primary transition-colors pb-1 h-full flex items-center text-xs"
           >
             Marketplace
+          </Link>
+          <Link
+            to="/become-instructor"
+            className={`font-medium pb-1 h-full flex items-center text-xs transition-colors ${
+              location.pathname === '/become-instructor'
+                ? 'text-primary border-b-2 border-primary font-semibold'
+                : 'text-text-secondary hover:text-primary'
+            }`}
+          >
+            Become an Instructor
           </Link>
 
           {user?.role === 'student' && (
             <Link
               to="/dashboard"
-              className={`font-medium pb-1 h-full flex items-center text-sm transition-colors ${
+              className={`font-medium pb-1 h-full flex items-center text-xs transition-colors ${
                 location.pathname === '/dashboard'
-                  ? 'text-primary border-b-2 border-primary'
+                  ? 'text-primary border-b-2 border-primary font-semibold'
                   : 'text-text-secondary hover:text-primary'
               }`}
             >
@@ -68,9 +78,9 @@ export const Navbar: React.FC = () => {
           {(user?.role === 'instructor' || user?.role === 'admin') && (
             <Link
               to="/instructor/dashboard"
-              className={`font-medium pb-1 h-full flex items-center text-sm transition-colors ${
+              className={`font-medium pb-1 h-full flex items-center text-xs transition-colors ${
                 location.pathname.startsWith('/instructor')
-                  ? 'text-primary border-b-2 border-primary'
+                  ? 'text-primary border-b-2 border-primary font-semibold'
                   : 'text-text-secondary hover:text-primary'
               }`}
             >
@@ -81,9 +91,9 @@ export const Navbar: React.FC = () => {
           {user?.role === 'admin' && (
             <Link
               to="/admin/dashboard"
-              className={`font-medium pb-1 h-full flex items-center text-sm transition-colors ${
+              className={`font-medium pb-1 h-full flex items-center text-xs transition-colors ${
                 location.pathname.startsWith('/admin')
-                  ? 'text-primary border-b-2 border-primary'
+                  ? 'text-primary border-b-2 border-primary font-semibold'
                   : 'text-text-secondary hover:text-primary'
               }`}
             >
@@ -92,13 +102,13 @@ export const Navbar: React.FC = () => {
           )}
         </nav>
 
-        {/* Search Bar & User Actions */}
+        {/* Search Bar & Trailing Actions */}
         <div className="flex items-center gap-3">
           <form onSubmit={handleSearchSubmit} className="hidden lg:flex items-center gap-2 bg-surface-subtle border border-border-subtle rounded-xl px-3 h-10 w-64 focus-ring transition-all">
             <Search className="w-4 h-4 text-text-tertiary" />
             <input
               type="text"
-              placeholder="Search courses..."
+              placeholder="Search for courses..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="bg-transparent border-0 p-0 text-xs text-text-primary placeholder:text-text-tertiary focus:ring-0 w-full"
@@ -133,6 +143,15 @@ export const Navbar: React.FC = () => {
                     <p className="text-[11px] text-text-secondary truncate">{user.email}</p>
                   </div>
 
+                  <Link
+                    to="/become-instructor"
+                    onClick={() => setShowDropdown(false)}
+                    className="flex items-center gap-2 px-4 py-2 text-xs text-text-primary hover:bg-surface-subtle"
+                  >
+                    <Sparkles className="w-3.5 h-3.5 text-purple-600" />
+                    Become an Instructor
+                  </Link>
+
                   {user.role === 'student' && (
                     <Link
                       to="/dashboard"
@@ -152,7 +171,7 @@ export const Navbar: React.FC = () => {
                         className="flex items-center gap-2 px-4 py-2 text-xs text-text-primary hover:bg-surface-subtle"
                       >
                         <LayoutDashboard className="w-3.5 h-3.5 text-text-secondary" />
-                        Instructor Dashboard
+                        Instructor Studio
                       </Link>
                       <Link
                         to="/instructor/create-course"
@@ -207,7 +226,7 @@ export const Navbar: React.FC = () => {
               </Link>
               <Link
                 to="/register"
-                className="h-9 px-4 rounded-lg bg-primary text-white text-xs font-medium flex items-center justify-center transition-all hover:bg-zinc-800 shadow-sm"
+                className="h-10 px-4 rounded-[10px] bg-primary text-on-primary text-xs font-medium flex items-center justify-center transition-all duration-150 hover:bg-[#27272A] active:scale-95 shadow-sm"
               >
                 Sign Up
               </Link>

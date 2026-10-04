@@ -14,6 +14,7 @@ import { StudentDashboard } from './pages/StudentDashboard';
 import { LearningInterface } from './pages/LearningInterface';
 import { InstructorDashboard } from './pages/InstructorDashboard';
 import { CreateCoursePage } from './pages/CreateCoursePage';
+import { BecomeInstructorPage } from './pages/BecomeInstructorPage';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { ProfilePage } from './pages/ProfilePage';
 
@@ -32,6 +33,7 @@ export const App: React.FC = () => {
               <Route path="/courses/:id" element={<CourseDetailPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
+              <Route path="/become-instructor" element={<BecomeInstructorPage />} />
 
               <Route
                 path="/dashboard"

@@ -195,10 +195,50 @@ const updateProfile = async (req, res) => {
   }
 };
 
+// @desc Upgrade current user to Instructor role
+// @route POST /api/auth/become-instructor
+// @access Protected
+const becomeInstructor = async (req, res) => {
+  try {
+    const { bio, expertise } = req.body;
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found.' });
+    }
+
+    user.role = 'instructor';
+    await user.save();
+
+    // Update Session
+    req.session.role = 'instructor';
+
+    return res.status(200).json({
+      success: true,
+      message: 'Congratulations! Your account has been upgraded to Instructor.',
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        profileImage: user.profileImage,
+      },
+    });
+  } catch (error) {
+    console.error('Become instructor error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to process instructor upgrade.',
+    });
+  }
+};
+
 module.exports = {
   register,
   login,
   logout,
   getMe,
   updateProfile,
+  becomeInstructor,
 };
+
