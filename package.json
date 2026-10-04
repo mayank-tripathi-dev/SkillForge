@@ -1,0 +1,15 @@
+{
+  "name": "skillforge-root",
+  "version": "1.0.0",
+  "description": "SkillForge - Full-Stack Online Course Selling Platform",
+  "scripts": {
+    "install:all": "npm install --prefix server && npm install --prefix client",
+    "seed": "npm run seed --prefix server",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "build:client": "npm run build --prefix client"
+  },
+  "keywords": ["skillforge", "course-selling", "mern", "interview-ready"],
+  "author": "SkillForge Engineering Team",
+  "license": "ISC"
+}

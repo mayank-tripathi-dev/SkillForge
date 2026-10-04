@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: skillforge_mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: skillforge
+    volumes:
+      - mongo_data:/data/db
+
+  server:
+    build: ./server
+    container_name: skillforge_server
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      MONGODB_URI: mongodb://mongo:27017/skillforge
+      SESSION_SECRET: skillforge_docker_super_secret_session_key_2026
+      CLIENT_URL: http://localhost:5173
+      NODE_ENV: production
+    depends_on:
+      - mongo
+
+  client:
+    build: ./client
+    container_name: skillforge_client
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+
+volumes:
+  mongo_data:
